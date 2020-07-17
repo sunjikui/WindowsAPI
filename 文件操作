@@ -1,0 +1,17 @@
+// 获取函数地址
+PVOID GetFunctionAddress(char *pszFunctionName)
+{
+	PVOID pAddr = NULL;
+	HMODULE hDll = NULL;
+	char szDllPath[MAX_PATH] = "C:\\Windows\\System32\\VERSION.dll";
+
+	hDll = ::LoadLibrary(szDllPath);
+	if (NULL == hDll)
+	{
+		return NULL;
+	}
+	pAddr = ::GetProcAddress(hDll, pszFunctionName);
+	::FreeLibrary(hDll);
+
+	return pAddr;
+}
